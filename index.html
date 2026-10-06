@@ -7,7 +7,7 @@
 <meta name="description" content="Mohammed Afeez Olamilekan: embedded systems and AI engineer with a Financial Engineering MSc, open to fintech, quant, embedded, energy and AI roles.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* Layout: an engineering datasheet with a role selector — title block, spec tables, signal-chain diagram, revision history. Copper traces on cool board-white. */
 :root{
@@ -214,12 +214,117 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
 .job .edge b{color:var(--copper)}
 .job .where{font:400 .76rem/1.45 var(--f-mono);color:var(--muted)}
 .role-tabs{max-width:36rem}
+
+/* ---- career theme ---- */
+:root:root:root{
+  --bg:#0A0A1A;--panel:rgba(255,255,255,.03);--ink:#FFFFFF;--muted:rgba(255,255,255,.58);--rule:rgba(255,255,255,.08);
+  --copper:#7C6AFF;--copper-soft:rgba(124,106,255,.12);--trace:#A99DFF;--mask:#4ADE80;
+  --f-display:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+body{background:var(--bg);line-height:1.65}
+a{color:var(--trace)}
+a:hover{color:#fff}
+.label{font:500 .72rem/1.4 var(--f-body);letter-spacing:.2em;color:var(--copper)}
+
+.bar{background:rgba(10,10,26,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .wrap{padding-block:1.1rem}
+.bar .id{font:700 1.35rem var(--f-body);letter-spacing:0}
+.bar .id i{font-style:normal;color:var(--copper)}
+.bar nav{gap:1.75rem}
+.bar nav a{font:500 .95rem var(--f-body);color:rgba(255,255,255,.62)}
+.bar nav a:hover{color:var(--copper)}
+
+#top > .hero{max-width:none;padding-inline:clamp(16px,4vw,40px);padding-block:clamp(4rem,10vw,7rem) clamp(3rem,7vw,5rem);
+  background:radial-gradient(60rem 30rem at 70% 0%,rgba(124,106,255,.16),transparent 70%),linear-gradient(135deg,#0A0A1A 0%,#1A1040 45%,#0D1F3C 100%)}
+.hero-grid{grid-template-columns:1fr;max-width:52rem;margin-inline:auto;justify-items:center;text-align:center;gap:3rem}
+.hero-grid > div{display:flex;flex-direction:column;align-items:center}
+.partno{justify-content:center;margin-bottom:1.5rem}
+.chip{font:500 .7rem var(--f-body);letter-spacing:.15em;border-radius:50px;padding:.3rem .8rem;border-color:rgba(124,106,255,.35)}
+.chip.solid{background:var(--copper-soft);color:var(--copper);border-color:rgba(124,106,255,.35)}
+.hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:700;font-stretch:normal;text-transform:none;letter-spacing:-.02em;line-height:1.08}
+.hero h1 .dot{font-style:normal;color:var(--copper)}
+.hero h1 span{font-size:clamp(1.05rem,2.2vw,1.25rem);font-weight:400;font-stretch:normal;letter-spacing:0;color:rgba(255,255,255,.62);margin-top:1rem}
+.lede{color:rgba(255,255,255,.55);font-size:1.05rem;line-height:1.8;max-width:42rem;margin-inline:auto}
+.fit{text-align:left;max-width:40rem;margin-top:2rem;padding:1.25rem 1.5rem;background:var(--panel);border:1px solid var(--rule);border-radius:16px;gap:.75rem}
+.fit li{padding-left:1.75rem;color:rgba(255,255,255,.8)}
+.fit li::before{content:"\2713";background:none;width:auto;height:auto;top:0;color:var(--copper);font-weight:600}
+.cta{justify-content:center;margin-top:2rem;gap:.9rem}
+.btn{font:500 .9rem var(--f-body);border-radius:50px;padding:.8rem 1.9rem;border:1px solid var(--rule);color:#fff}
+.btn:hover{border-color:var(--copper);color:#fff;background:var(--copper-soft)}
+.btn.primary{background:var(--copper);border-color:var(--copper);color:#fff;box-shadow:0 8px 30px rgba(124,106,255,.35)}
+.btn.primary:hover{background:#8F80FF;border-color:#8F80FF;color:#fff}
+
+.spec{background:var(--panel);border:1px solid var(--rule);border-radius:16px;overflow:hidden;width:100%;max-width:44rem;text-align:left}
+.spec-h{font:600 .72rem var(--f-body);letter-spacing:.2em;color:var(--copper)}
+.spec dt{font:500 .72rem/1.95 var(--f-body);letter-spacing:.12em;color:rgba(255,255,255,.4)}
+.spec dd{color:rgba(255,255,255,.85)}
+
+section{border-top:0;padding-block:clamp(4rem,9vw,6rem)}
+.sec-h{grid-template-columns:1fr;justify-items:center;text-align:center;gap:.8rem;margin-bottom:3rem}
+.sec-h h2{font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:700;font-stretch:normal;letter-spacing:-.01em}
+.sec-h h2::before{content:attr(data-kicker);display:block;font:500 .75rem var(--f-body);letter-spacing:.25em;color:var(--copper);margin-bottom:.9rem;text-transform:uppercase}
+.sec-h p{color:rgba(255,255,255,.5);max-width:36rem}
+
+.track{justify-content:center;text-align:center;font:600 1.05rem var(--f-body);letter-spacing:.02em;text-transform:none;color:#fff}
+.track span{color:rgba(255,255,255,.45)}
+.job,.proj,.pub,.certs,.pingroup,.rev{background:var(--panel);border:1px solid var(--rule);border-radius:16px}
+.job{border-top:1px solid var(--rule);padding:1.6rem;gap:.8rem;transition:border-color .2s,transform .2s}
+.job:hover,.proj:hover{border-color:rgba(124,106,255,.45);transform:translateY(-3px)}
+.job h3,.proj h3,.pub h3,.edu h3{font-family:var(--f-body);font-weight:600;font-stretch:normal;color:#fff}
+.job h3{color:var(--copper)}
+.job p{color:rgba(255,255,255,.72)}
+.job .edge{border:1px solid rgba(124,106,255,.22);border-radius:10px;padding:.65rem .8rem}
+.job .edge b{color:var(--trace)}
+.job .where{font:400 .8rem var(--f-body);color:rgba(255,255,255,.42)}
+
+.proj{padding:1.6rem;transition:border-color .2s,transform .2s}
+.proj.feat{border-color:rgba(124,106,255,.3)}
+.proj .ref{font:600 .68rem var(--f-body);letter-spacing:.15em;color:var(--copper)}
+.proj .metric{font:500 .75rem var(--f-body);color:#fff;background:var(--copper-soft);border:1px solid rgba(124,106,255,.25);border-radius:50px;padding:.2rem .65rem}
+.proj p,.pub .role{color:rgba(255,255,255,.62)}
+.tag,.pingroup li{font:400 .78rem var(--f-body);color:rgba(255,255,255,.75);background:var(--copper-soft);border:1px solid rgba(124,106,255,.2);border-radius:6px;padding:.3rem .75rem}
+.proj a.repo,.pub .links{font:500 .82rem var(--f-body)}
+
+.pubs{background:transparent;border:0;gap:1.25rem}
+.pub{padding:1.6rem}
+.pub .yr{font:700 1rem var(--f-body);color:var(--copper)}
+.pub .venue{font:400 .82rem var(--f-body);color:rgba(255,255,255,.45)}
+.scholar{justify-content:center;font:400 .85rem var(--f-body)}
+
+.rev{overflow:hidden;border-collapse:separate;border-spacing:0}
+.rev th{font:600 .7rem var(--f-body);letter-spacing:.2em;color:var(--copper);border-bottom:1px solid var(--rule)}
+.rev td{border-bottom:1px solid var(--rule)}
+.rev .r{font:700 .95rem var(--f-body);color:var(--copper)}
+.rev .d{font:400 .85rem var(--f-body);color:rgba(255,255,255,.45)}
+.rev .role{font-family:var(--f-body);font-weight:600;font-stretch:normal}
+.rev ul{color:rgba(255,255,255,.72)}
+
+.pins{gap:1.25rem}
+.pingroup{border-top:1px solid var(--rule);padding:1.5rem;gap:1rem}
+.pingroup h3{font:600 1rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--copper)}
+
+.certs{overflow:hidden}
+.certs .t{color:#fff}
+.certs .when{font:400 .8rem var(--f-body)}
+.certs .new{font:600 .62rem var(--f-body);border-radius:50px;padding:.12rem .5rem;color:#fff}
+.edu .meta{font:400 .85rem var(--f-body);color:rgba(255,255,255,.45)}
+
+.contact{text-align:center;grid-template-columns:1fr;justify-items:center;max-width:46rem;margin-inline:auto}
+.contact h2{font:700 clamp(1.8rem,4vw,2.4rem) var(--f-body);text-transform:none;letter-spacing:-.01em}
+.contact .prose{margin-inline:auto;color:rgba(255,255,255,.6)}
+.contact .spec{text-align:left}
+.copyrow code{font:500 .95rem var(--f-body)}
+.copied{font:400 .78rem var(--f-body)}
+footer{font:400 .82rem var(--f-body);color:rgba(255,255,255,.4)}
 </style>
 </head>
 <body>
 <header class="bar">
   <div class="wrap">
-    <a class="id" href="#top">MAO · ENGINEER</a>
+    <a class="id" href="#top">MAO<i>.</i></a>
     <nav aria-label="Sections">
       <a href="#roles">Roles</a>
       <a href="#publications">Publications</a>
@@ -240,7 +345,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
           <span class="chip solid">Rev. 2026</span>
           <span class="label">Lagos, Nigeria · B.Sc. Electronic &amp; Electrical Eng., OAU</span>
         </div>
-        <h1>Mohammed Afeez Olamilekan<span id="h-sub">Embedded systems &amp; AI engineer with a Financial Engineering MSc</span></h1>
+        <h1>Mohammed Afeez Olamilekan<i class="dot">.</i><span id="h-sub">Embedded systems &amp; AI engineer with a Financial Engineering MSc</span></h1>
         <p class="lede" id="h-lede">I build hardware, firmware and AI systems, and I understand the money they move. I have 4+ years in firmware and hardware R&amp;D, including payment terminals at a fintech, and an MSc in Financial Engineering from WorldQuant University (December 2026). I can work on the device, the data and the risk model.</p>
         <ul class="fit" id="h-fit">
           <li>Lead firmware developer for POS payment terminals at WarpSpeed Financials, covering OTA updates, telemetry and diagnostics.</li>
@@ -270,7 +375,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="roles">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Roles I fit</h2>
+        <h2 data-kicker="What I can do">Roles I fit</h2>
         <p>The jobs my experience supports, and what my Financial Engineering MSc adds to each one.</p>
       </div>
       <h3 class="track">Engineering × finance <span>Roles where the MSc sets me apart</span></h3>
@@ -333,7 +438,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="publications">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Publications</h2>
+        <h2 data-kicker="Research output">Publications</h2>
         <p>Preprints co-authored with the Axum AI research group. Both projects are open source.</p>
       </div>
       <ol class="pubs">
@@ -369,7 +474,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="projects">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Projects</h2>
+        <h2 data-kicker="My recent work">Projects</h2>
         <p id="proj-note">Ordered for job applications. Fintech and finance-related work comes first.</p>
       </div>
       <div class="projects" id="projects-grid">
@@ -519,7 +624,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="experience">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Revision history</h2>
+        <h2 data-kicker="Where I've worked">Revision history</h2>
         <p>Professional and research experience, newest first.</p>
       </div>
       <div class="rev-wrap">
@@ -608,7 +713,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="skills">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Pin description</h2>
+        <h2 data-kicker="Skills I have">Pin description</h2>
         <p>Tools and methods, grouped by function and ordered for the role you selected.</p>
       </div>
       <div class="pins" id="pins">
@@ -628,7 +733,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75re
   <section id="credentials">
     <div class="wrap">
       <div class="sec-h">
-        <h2>Credentials</h2>
+        <h2 data-kicker="Education & certifications">Credentials</h2>
         <p>Education and verified certifications, newest first. Titles link to the issuer's verification page where one exists.</p>
       </div>
       <div class="two">
