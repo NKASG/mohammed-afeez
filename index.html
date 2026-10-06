@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mohammed Afeez Olamilekan</title>
+<meta name="description" content="Mohammed Afeez Olamilekan: embedded systems and AI engineer with a Financial Engineering MSc, open to fintech, quant, embedded and AI roles, and to fully funded PhD research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: an engineering datasheet with a role selector — title block, spec tables, signal-chain diagram, revision history. Copper traces on cool board-white. */
+:root{
+  --bg:#F3F5F4;--panel:#FFFFFF;--ink:#15212A;--muted:#5A6870;--rule:#D3DAD8;
+  --copper:#A4511C;--copper-soft:#F3E3D6;--trace:#1E6A9E;--mask:#2F6B4F;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --s0:1rem;--s1:1.1875rem;--s2:1.5rem;--s3:2.125rem;--s4:clamp(2.4rem,6.2vw,4.4rem);
+  --wrap:72rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1416;--panel:#151D20;--ink:#E2E8E6;--muted:#93A2A6;--rule:#2A3639;
+  --copper:#E39159;--copper-soft:#3A2618;--trace:#6CB4E6;--mask:#6FBF96;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1416;--panel:#151D20;--ink:#E2E8E6;--muted:#93A2A6;--rule:#2A3639;
+  --copper:#E39159;--copper-soft:#3A2618;--trace:#6CB4E6;--mask:#6FBF96;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--s0)/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+a{color:var(--trace);text-underline-offset:3px}
+a:hover{color:var(--copper)}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.label{font:500 .72rem/1.3 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.7rem}
+.bar .id{font:600 .8rem var(--f-mono);letter-spacing:.06em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.bar nav{display:flex;gap:1.1rem}
+.bar nav a{font:500 .8rem var(--f-mono);color:var(--muted);text-decoration:none;white-space:nowrap}
+.bar nav a:hover{color:var(--copper)}
+@media (max-width:820px){.bar nav{display:none}}
+
+/* role selector */
+.roles{display:grid;gap:.6rem;margin-bottom:2rem}
+.role-tabs{display:flex;gap:0;border:1px solid var(--ink);border-radius:3px;overflow-x:auto;scrollbar-width:thin;background:var(--panel);max-width:100%}
+.role-tabs button{flex:1 0 auto;font:500 .78rem var(--f-mono);letter-spacing:.02em;padding:.62rem .9rem;border:0;border-right:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap}
+.role-tabs button:last-child{border-right:0}
+.role-tabs button:hover{color:var(--ink)}
+.role-tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.role-tabs button .star{color:var(--copper)}
+.role-tabs button[aria-selected="true"] .star{color:var(--copper-soft)}
+
+/* title block */
+.hero{padding-block:clamp(2rem,5vw,3.5rem) clamp(2rem,5vw,3.5rem)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+@media (max-width:880px){.hero-grid{grid-template-columns:1fr}}
+.partno{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;margin-bottom:1.1rem}
+.chip{font:500 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:.28rem .55rem;border:1px solid var(--copper);color:var(--copper);border-radius:2px}
+.chip.solid{background:var(--copper);color:var(--bg)}
+.hero h1{font-size:var(--s4);font-weight:800;font-stretch:72%;letter-spacing:-.01em;text-transform:uppercase}
+.hero h1 span{display:block;font-weight:500;font-stretch:112%;font-size:.36em;letter-spacing:.03em;color:var(--copper);margin-top:.7rem;text-transform:none;line-height:1.3}
+.lede{font-size:var(--s1);line-height:1.55;max-width:39rem;margin-top:1.4rem}
+.fit{margin:1.4rem 0 0;padding:0;list-style:none;display:grid;gap:.55rem;max-width:39rem}
+.fit li{padding-left:1.4rem;position:relative;font-size:.95rem}
+.fit li::before{content:"";position:absolute;left:0;top:.7em;width:.8rem;height:1.5px;background:var(--copper)}
+.cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font:500 .875rem var(--f-mono);padding:.7rem 1rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;border-radius:2px;background:transparent;cursor:pointer}
+.btn:hover{border-color:var(--copper);color:var(--copper)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--copper);border-color:var(--copper);color:var(--bg)}
+
+.spec{background:var(--panel);border:1px solid var(--rule);border-radius:3px}
+.spec-h{font:600 .75rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:.75rem 1rem;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:1rem}
+.spec-h span+span{color:var(--muted)}
+.spec dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.spec dt,.spec dd{margin:0;padding:.62rem 1rem;border-bottom:1px solid var(--rule);font-size:.9rem}
+.spec dt{font:500 .72rem/1.95 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.spec dl > :nth-last-child(-n+2){border-bottom:0}
+.status{display:inline-flex;align-items:baseline;gap:.5rem}
+.status::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--mask);box-shadow:0 0 0 3px color-mix(in srgb,var(--mask) 25%,transparent);flex:none;transform:translateY(-.1em)}
+
+/* sections */
+section{padding-block:clamp(2.5rem,6vw,4.25rem);border-top:1px solid var(--rule)}
+.sec-h{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:.75rem 2.5rem;margin-bottom:2.25rem;align-items:baseline}
+@media (max-width:760px){.sec-h{grid-template-columns:1fr}}
+.sec-h h2{font-size:var(--s3);font-weight:700;font-stretch:85%}
+.sec-h p{color:var(--muted);max-width:42rem}
+.prose{max-width:42rem;display:grid;gap:1rem;font-size:1.0625rem}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem}
+@media (max-width:880px){.two{grid-template-columns:1fr}}
+
+.interests{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;align-self:start}
+@media (max-width:640px){.interests{grid-template-columns:1fr}}
+.interest{background:var(--panel);padding:1.2rem 1.25rem 1.3rem;display:grid;gap:.45rem;align-content:start}
+.interest h3{font-size:var(--s1);font-weight:650;font-stretch:95%}
+.interest p{color:var(--muted);font-size:.93rem}
+
+/* publications */
+.pubs{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.pub{background:var(--panel);padding:1.35rem 1.4rem;display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.4rem 1.25rem}
+@media (max-width:600px){.pub{grid-template-columns:1fr}}
+.pub .yr{font:600 .9rem var(--f-mono);color:var(--copper);font-variant-numeric:tabular-nums}
+.pub h3{font-size:1.15rem;font-weight:650;font-stretch:95%;line-height:1.25}
+.pub .authors{font-size:.85rem;color:var(--muted);margin-top:.35rem}
+.pub .authors b{color:var(--ink);font-weight:600}
+.pub .venue{font:400 .8rem var(--f-mono);color:var(--muted);margin-top:.35rem}
+.pub .role{font-size:.92rem;margin-top:.6rem}
+.pub .links{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-top:.6rem;font:500 .8rem var(--f-mono)}
+.scholar{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;align-items:baseline;margin-top:1rem;font:400 .82rem var(--f-mono);color:var(--muted)}
+.scholar b{font-weight:600;color:var(--ink);font-size:1rem}
+
+/* signal chain */
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.chain{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:1.5rem}}
+@media (max-width:520px){.chain{grid-template-columns:1fr}}
+.stage{padding:1.25rem 1.5rem 1.25rem 0;display:grid;gap:.6rem;align-content:start}
+.stage + .stage{padding-left:1.5rem;border-left:1px dashed var(--rule)}
+@media (max-width:900px){.stage:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:520px){.stage + .stage{padding-left:0;border-left:0;border-top:1px dashed var(--rule);padding-top:1.5rem}}
+.stage .node{display:flex;align-items:center;gap:.6rem}
+.stage .pin{font:600 .72rem var(--f-mono);width:2rem;height:2rem;display:grid;place-items:center;border:1.5px solid var(--copper);color:var(--copper);border-radius:50%;flex:none}
+.stage h3{font-size:var(--s2);font-weight:700;font-stretch:80%;text-transform:uppercase;letter-spacing:.02em}
+.stage p{font-size:.92rem;color:var(--muted)}
+.stage ul{margin:0;padding:0;list-style:none;display:grid;gap:.35rem}
+.stage li{font-size:.88rem;padding-left:1rem;position:relative}
+.stage li::before{content:"";position:absolute;left:0;top:.62em;width:.45rem;height:1.5px;background:var(--copper)}
+.loop-note{margin-top:1.75rem;font:400 .82rem var(--f-mono);color:var(--muted);display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr));gap:1.25rem}
+.proj{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:1.25rem;display:grid;grid-template-rows:auto auto 1fr auto;gap:.7rem;min-width:0}
+.proj.feat{border-color:color-mix(in srgb,var(--copper) 55%,var(--rule))}
+.proj .top{display:flex;justify-content:space-between;gap:.75rem;align-items:baseline}
+.proj .ref{font:500 .72rem var(--f-mono);color:var(--copper);letter-spacing:.05em}
+.proj h3{font-size:1.2rem;font-weight:650;font-stretch:95%;line-height:1.2}
+.proj p{font-size:.92rem;color:var(--muted)}
+.proj .metric{font:500 .78rem var(--f-mono);color:var(--ink);background:var(--copper-soft);padding:.15rem .4rem;border-radius:2px;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+.tag{font:400 .7rem var(--f-mono);color:var(--muted);border:1px solid var(--rule);padding:.12rem .4rem;border-radius:2px}
+.proj a.repo{font:500 .78rem var(--f-mono);margin-left:auto}
+.more-row{display:flex;justify-content:center;margin-top:1.75rem}
+
+/* revision history */
+.rev-wrap{overflow-x:auto}
+.rev{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--rule)}
+.rev th{font:600 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--muted);padding:.75rem 1rem;border-bottom:1px solid var(--ink)}
+.rev td{padding:1.1rem 1rem;border-bottom:1px solid var(--rule);vertical-align:top}
+.rev tr:last-child td{border-bottom:0}
+.rev .r{font:600 .85rem var(--f-mono);color:var(--copper);white-space:nowrap}
+.rev .d{font:400 .82rem var(--f-mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.rev .role{font-family:var(--f-display);font-weight:650;font-size:1.08rem;font-stretch:95%}
+.rev .org{color:var(--muted);font-size:.88rem;margin-bottom:.4rem}
+.rev ul{margin:.25rem 0 0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:.92rem}
+@media (max-width:700px){
+  .rev,.rev tbody,.rev tr,.rev td{display:block;width:100%}
+  .rev thead{display:none}
+  .rev tr{border-bottom:1px solid var(--rule);padding:1rem}
+  .rev tr:last-child{border-bottom:0}
+  .rev td{padding:0;border:0}
+  .rev td.r,.rev td.d{display:inline-block;width:auto;margin-right:.75rem;margin-bottom:.4rem}
+}
+
+/* skills */
+.pins{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));gap:1.5rem 1.25rem}
+.pingroup{border-top:2px solid var(--ink);padding-top:.85rem;display:grid;gap:.65rem;align-content:start}
+.pingroup h3{font-size:1rem;font-weight:650;font-stretch:95%;text-transform:uppercase;letter-spacing:.03em}
+.pingroup ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem}
+.pingroup li{font:400 .8rem var(--f-mono);padding:.25rem .5rem;background:var(--panel);border:1px solid var(--rule);border-radius:2px}
+
+/* credentials */
+.certs{list-style:none;margin:0;padding:0;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+.certs li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.15rem 1rem;padding:.8rem 1rem;border-bottom:1px solid var(--rule);align-items:baseline}
+.certs li:last-child{border-bottom:0}
+.certs .t{font-weight:600}
+.certs .t a{color:inherit;text-decoration-color:var(--rule)}
+.certs .t a:hover{color:var(--copper)}
+.certs .i{font-size:.85rem;color:var(--muted);grid-column:1}
+.certs .when{font:400 .78rem var(--f-mono);color:var(--muted);text-align:right;grid-row:1;grid-column:2;font-variant-numeric:tabular-nums}
+.certs .new{font:600 .65rem var(--f-mono);color:var(--bg);background:var(--copper);padding:.1rem .35rem;border-radius:2px;margin-left:.4rem;vertical-align:.1em;letter-spacing:.05em}
+.edu{display:grid;gap:1.4rem;align-content:start}
+.edu .item{display:grid;gap:.3rem}
+.edu h3{font-size:1.15rem;font-weight:650;font-stretch:95%}
+.edu .meta{font:400 .8rem var(--f-mono);color:var(--muted)}
+.edu p{font-size:.92rem;color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2.5rem;align-items:start}
+@media (max-width:880px){.contact{grid-template-columns:1fr}}
+.contact h2{font-size:var(--s3);font-weight:800;font-stretch:78%;text-transform:uppercase}
+.contact .prose{margin-top:1rem}
+.copyrow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.copyrow code{font:500 .92rem var(--f-mono);user-select:all;word-break:break-all}
+.copied{font:400 .75rem var(--f-mono);color:var(--mask)}
+footer{border-top:1px solid var(--rule);padding-block:1.5rem 2.5rem;font:400 .78rem var(--f-mono);color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem}
+
+/* roles I fit */
+.track{font-size:1.05rem;font-weight:700;font-stretch:90%;text-transform:uppercase;letter-spacing:.03em;display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:baseline;margin:0 0 1rem}
+.track span{font:400 .8rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--muted)}
+.jobs + .track{margin-top:2.5rem}
+.jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr));gap:1.25rem}
+.job{background:var(--panel);border:1px solid var(--rule);border-top:2px solid var(--copper);border-radius:3px;padding:1.15rem 1.2rem 1.25rem;display:grid;grid-template-rows:auto 1fr auto auto;gap:.6rem;min-width:0}
+.job h3{font-size:1.12rem;font-weight:650;font-stretch:95%;line-height:1.2}
+.job p{font-size:.9rem}
+.job b{font-weight:600}
+.job .edge{background:var(--copper-soft);padding:.5rem .6rem;border-radius:2px}
+.job .edge b{color:var(--copper)}
+.job .where{font:400 .76rem/1.45 var(--f-mono);color:var(--muted)}
+.role-tabs{max-width:36rem}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="id" href="#top">MAO · RESEARCHER / ENGINEER</a>
+    <nav aria-label="Sections">
+      <a href="#roles">Roles</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="roles">
+      <span class="label" id="roles-label">Viewing as</span>
+      <div class="role-tabs" role="tablist" aria-labelledby="roles-label">
+        <button type="button" role="tab" id="r-career" data-role="career" aria-selected="true">Career · jobs I can do</button>
+        <button type="button" role="tab" id="r-scholarship" data-role="scholarship" aria-selected="false"><span class="star">★</span> Scholarship · research</button>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="partno">
+          <span class="chip solid">Rev. 2026</span>
+          <span class="label">Lagos, Nigeria · B.Sc. Electronic &amp; Electrical Eng., OAU</span>
+        </div>
+        <h1>Mohammed Afeez Olamilekan<span id="h-sub">Embedded systems &amp; AI engineer with a Financial Engineering MSc</span></h1>
+        <p class="lede" id="h-lede">I build hardware, firmware and AI systems, and I understand the money they move. I have 4+ years in firmware and hardware R&amp;D, including payment terminals at a fintech, and an MSc in Financial Engineering from WorldQuant University (December 2026). I can work on the device, the data and the risk model.</p>
+        <ul class="fit" id="h-fit">
+          <li>Lead firmware developer for POS payment terminals at WarpSpeed Financials, covering OTA updates, telemetry and diagnostics.</li>
+          <li>Financial engineering in practice: I have applied Merton, CIR and PCA models to risk analysis at work.</li>
+          <li>Production AI: edge vision on a factory line, RAG assistants, and two co-authored research preprints.</li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" id="h-cta" href="#roles">Roles I fit</a>
+          <a class="btn" href="#projects">Projects</a>
+          <a class="btn" href="https://github.com/NKASG" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+      <aside class="spec" aria-label="Key facts">
+        <div class="spec-h"><span id="spec-title">Key characteristics</span><span>TYP.</span></div>
+        <dl id="spec">
+          <dt>Current</dt><dd>Firmware Engineer, WarpSpeed Financials (fintech)</dd>
+          <dt>Degrees</dt><dd>B.Sc. Electronic &amp; Electrical Eng. (OAU) · MSc Financial Eng. (WQU, Dec 2026)</dd>
+          <dt>Engineering</dt><dd>C/C++, RTOS, STM32, PCB design, IoT / MQTT</dd>
+          <dt>Finance</dt><dd>Merton, CIR, PCA, risk modelling, Python</dd>
+          <dt>AI</dt><dd>YOLOv8, TinyML, RAG &amp; LLMs</dd>
+          <dt>Status</dt><dd><span class="status">Open to roles · on-site, hybrid or remote</span></dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <section id="roles" data-for="career">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Roles I fit</h2>
+        <p>The jobs my experience supports, and what my Financial Engineering MSc adds to each one.</p>
+      </div>
+      <h3 class="track">Engineering × finance <span>Roles where the MSc sets me apart</span></h3>
+      <div class="jobs">
+        <article class="job">
+          <h3>Fintech hardware &amp; firmware engineer</h3>
+          <p><b>Fit:</b> I lead firmware for POS terminals and their terminal management system (OTA updates, telemetry, diagnostics) at a fintech.</p>
+          <p class="edge"><b>Finance edge:</b> I understand payment flows, settlement and transaction risk, not just the device.</p>
+          <p class="where">Payment processors, POS and card-terminal makers, fintechs, banks</p>
+        </article>
+        <article class="job">
+          <h3>Quantitative developer / risk engineer</h3>
+          <p><b>Fit:</b> I have applied Merton, CIR and PCA models to risk analysis at work, and I build production Python and FastAPI data systems.</p>
+          <p class="edge"><b>Finance edge:</b> A full MSc in stochastic modelling, derivatives pricing and econometrics, backed by an engineer's coding discipline.</p>
+          <p class="where">Banks, asset managers, trading firms, risk and treasury teams</p>
+        </article>
+        <article class="job">
+          <h3>ML engineer, fintech (credit, fraud, risk)</h3>
+          <p><b>Fit:</b> I have production ML across vision, NLP and RAG, and I am a published co-author.</p>
+          <p class="edge"><b>Finance edge:</b> I can build credit-scoring and fraud models that make sense to risk and compliance teams.</p>
+          <p class="where">Digital lenders, payment companies, insurtechs, banks' data teams</p>
+        </article>
+        <article class="job">
+          <h3>Energy &amp; IoT analytics engineer</h3>
+          <p><b>Fit:</b> Smart metering at MEMMCOL, AMI and solar research at OAU, and an MQTT field monitor for energy loggers.</p>
+          <p class="edge"><b>Finance edge:</b> Tariff modelling, project finance and risk for solar, metering and energy assets.</p>
+          <p class="where">Utilities, metering companies, solar and mini-grid developers, energy investors</p>
+        </article>
+      </div>
+      <h3 class="track">Core engineering <span>Roles my industry experience supports directly</span></h3>
+      <div class="jobs">
+        <article class="job">
+          <h3>Embedded / IoT engineer</h3>
+          <p><b>Fit:</b> C on RTOS and STM32, OTA fleet updates, MQTT and HiveMQ telemetry, SIM800 connectivity.</p>
+          <p class="edge"><b>Finance edge:</b> I can weigh bill-of-materials cost, unit economics and fleet ROI when making design choices.</p>
+          <p class="where">IoT, energy and consumer-electronics companies</p>
+        </article>
+        <article class="job">
+          <h3>Edge AI / computer vision engineer</h3>
+          <p><b>Fit:</b> YOLOv8 on Raspberry Pi, OpenMV inspection on a live production line, TinyML on Nano 33 BLE, and the WQU Computer Vision Lab (2026).</p>
+          <p class="edge"><b>Finance edge:</b> I can make the business case for an AI deployment, not just build it.</p>
+          <p class="where">Manufacturing, security, agritech and smart-city companies</p>
+        </article>
+        <article class="job">
+          <h3>Hardware R&amp;D / test engineer</h3>
+          <p><b>Fit:</b> Full PCB lifecycle, power electronics, calibration benches, and supervising a production team.</p>
+          <p class="edge"><b>Finance edge:</b> Cost-of-quality and yield analysis using real statistics.</p>
+          <p class="where">Electronics manufacturers, meter and power-equipment makers</p>
+        </article>
+        <article class="job">
+          <h3>Applied AI / LLM engineer</h3>
+          <p><b>Fit:</b> A published RAG system (Drug Insights), production HR and support agents, and Activeloop certifications in LLM fine-tuning and LangChain.</p>
+          <p class="edge"><b>Finance edge:</b> LLM assistants for financial documents, risk reports and customer support in fintech.</p>
+          <p class="where">AI product teams, fintechs, health-tech and consulting firms</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" data-for="scholarship">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Research profile</h2>
+        <p>What I research, why, and the kind of funded study I am applying for.</p>
+      </div>
+      <div class="two">
+        <div class="prose">
+          <p>My work sits where hardware, AI and real-world constraints meet. I design systems that have to run on limited power, limited compute and limited data, because that is what most of Africa has to work with.</p>
+          <p>In industry I have put a camera-based PCB defect detector on a meter production line, led firmware for fleets of payment terminals, and built monitoring for field energy loggers. In research with Axum AI, I co-authored open-source tools for healthcare workers and city planners, built for data-scarce settings and published on arXiv, medRxiv and EarthArXiv.</p>
+          <p>My MSc in Financial Engineering at WorldQuant University, finishing in December 2026, added stochastic modelling, statistics and machine learning. I want a PhD where these come together: intelligent systems, from embedded AI and robots to energy and decision-support tools, built to be reliable and affordable in low-resource settings.</p>
+          <div class="spec" style="margin-top:.5rem">
+            <div class="spec-h"><span>Eligibility</span><span>2027 ENTRY</span></div>
+            <dl>
+              <dt>Eligible for</dt><dd>Fully funded PhD (research MSc also considered)</dd>
+              <dt>Qualifications</dt><dd>B.Sc. Electronic &amp; Electrical Eng. · MSc Financial Eng. (Dec 2026) · 4+ years' professional experience · 2 co-authored preprints</dd>
+              <dt>Fields</dt><dd>Electrical &amp; electronic eng. · Robotics · Computer science / AI · Energy systems · Computational finance</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="interests">
+          <div class="interest">
+            <span class="label">RT-1</span>
+            <h3>Embedded &amp; edge AI</h3>
+            <p>TinyML and on-device vision that fit microcontroller power and memory budgets.</p>
+          </div>
+          <div class="interest">
+            <span class="label">RT-2</span>
+            <h3>Robotics &amp; autonomous systems</h3>
+            <p>Perception, control and actuation for low-cost robots in agriculture, inspection and public safety.</p>
+          </div>
+          <div class="interest">
+            <span class="label">RT-3</span>
+            <h3>Human–machine interaction</h3>
+            <p>Gesture, sign-language and voice interfaces, building on my traffic-police and keyword models.</p>
+          </div>
+          <div class="interest">
+            <span class="label">RT-4</span>
+            <h3>Smart energy &amp; IoT</h3>
+            <p>Power electronics, smart metering, solar systems and fleet telemetry for unreliable grids.</p>
+          </div>
+          <div class="interest">
+            <span class="label">RT-5</span>
+            <h3>AI for health &amp; climate resilience</h3>
+            <p>Open-source RAG and geospatial models for data-scarce settings. Two co-authored preprints.</p>
+          </div>
+          <div class="interest">
+            <span class="label">RT-6</span>
+            <h3>Quantitative &amp; financial AI</h3>
+            <p>Stochastic models and machine learning for risk, drawing on my financial-engineering MSc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Publications</h2>
+        <p>Preprints co-authored with the Axum AI research group. Both projects are open source.</p>
+      </div>
+      <ol class="pubs">
+        <li class="pub">
+          <span class="yr">2026</span>
+          <div>
+            <h3>Open-source GIS-based multi-criteria flood risk model for data-constrained environments</h3>
+            <p class="authors">S. Abubakar, S. Oyatoye, O. Adebayo, C. Ezenwoko, A. Owoyemi, B. S. Oyajumo, J. Owoyemi, F. C. Madubuko, K. Akyea, <b>A. Mohammed</b>, G. Musa, C. Rutherford, E. Nkanang, K. Mumuni</p>
+            <p class="venue">EarthArXiv preprint · March 2026</p>
+            <p class="role">A modular Python workflow that combines open hydrological, soil, land-cover and drainage data into a 0–1 Flood Risk Index for Sub-Saharan cities that lack detailed hydrodynamic models.</p>
+            <div class="links"><a href="https://eartharxiv.org/repository/view/12147/" target="_blank" rel="noopener">EarthArXiv ↗</a><a href="https://github.com/OpenSourceCollective/flood_risk" target="_blank" rel="noopener">code ↗</a></div>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2025</span>
+          <div>
+            <h3>Open-source retrieval-augmented generation framework for retrieving accurate medication insights from formularies for African healthcare workers</h3>
+            <p class="authors">Axum AI: J. Owoyemi, S. Abubakar, A. Owoyemi, T. O. Togunwa, F. C. Madubuko, S. Oyatoye, Z. Oyetolu, K. Akyea, <b>A. O. Mohammed</b>, A. Adebakin</p>
+            <p class="venue">arXiv:2502.15722 [cs.IR] · medRxiv 2025.02.20.25322640</p>
+            <p class="role">Drug Insights, a RAG chatbot over Nigerian formulary data (EMDEX) using Pinecone and GPT models, evaluated with S-BERT and pharmacist feedback. I worked on the retrieval pipeline, including the Pinecone vector-store integration.</p>
+            <div class="links"><a href="https://arxiv.org/abs/2502.15722" target="_blank" rel="noopener">arXiv ↗</a><a href="https://doi.org/10.1101/2025.02.20.25322640" target="_blank" rel="noopener">medRxiv ↗</a><a href="https://github.com/OpenSourceCollective/drug_insights" target="_blank" rel="noopener">code ↗</a></div>
+          </div>
+        </li>
+      </ol>
+      <div class="scholar">
+        <span><b>6</b> citations</span>
+        <span><b>2</b> h-index</span>
+        <a href="https://scholar.google.com/citations?user=MxNlKXEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar profile ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="chain" data-for="scholarship">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Signal chain</h2>
+        <p>The four stages every robot needs, with the work I have already done at each one.</p>
+      </div>
+      <div class="chain">
+        <div class="stage">
+          <div class="node"><span class="pin">01</span><h3>Sense</h3></div>
+          <p>Sensors and cameras, interfaced and calibrated.</p>
+          <ul>
+            <li>Emonio P3 energy loggers streaming over MQTT</li>
+            <li>OpenMV camera on a PCB production line</li>
+            <li>CCTV and surveillance camera integration</li>
+            <li>Calibration benches, oscilloscopes, logic analyzers</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <div class="node"><span class="pin">02</span><h3>Compute</h3></div>
+          <p>Perception and decisions on constrained hardware.</p>
+          <ul>
+            <li>YOLOv8 object detection on Raspberry Pi</li>
+            <li>TinyML gesture &amp; keyword models on Nano 33 BLE</li>
+            <li>Register-level C on STM32L152, RTOS firmware</li>
+            <li>In-firmware fault diagnostics</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <div class="node"><span class="pin">03</span><h3>Act</h3></div>
+          <p>Control loops that move or switch something real.</p>
+          <ul>
+            <li>Closed-loop control of a 12/24/36 V push-pull inverter</li>
+            <li>Automatic sun-tracking solar panel</li>
+            <li>Relay control for home &amp; industrial automation</li>
+            <li>Biometric access &amp; attendance hardware</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <div class="node"><span class="pin">04</span><h3>Power</h3></div>
+          <p>Energy in, managed and converted for the load.</p>
+          <ul>
+            <li>Buck &amp; boost converters on ferrite-core transformers</li>
+            <li>Digital power supply (MEMMCOL)</li>
+            <li>DC metering / AMI design</li>
+            <li>Solar PV design &amp; installation</li>
+          </ul>
+        </div>
+      </div>
+      <p class="loop-note">
+        <svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><path d="M2 7 C 8 -1, 14 15, 20 7 S 30 -1, 32 7" fill="none" stroke="var(--trace)" stroke-width="1.6"/></svg>
+        Closing the loop from 04 back to 01 inside one robot is what I want graduate study to train.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Projects</h2>
+        <p id="proj-note">Ordered for job applications. Fintech and finance-related work comes first.</p>
+      </div>
+      <div class="projects" id="projects-grid">
+        <article class="proj" id="p-gesture">
+          <div class="top"><span class="ref">TINYML · HRI</span><span class="metric">90% acc.</span></div>
+          <h3>Gesture recognition for sign language</h3>
+          <p>An accelerometer gesture classifier (idle, wave, up/down) trained in Edge Impulse and deployed to an Arduino Nano 33 BLE and to phones. It is a first step toward reading sign language on-device.</p>
+          <div class="tags"><span class="tag">Edge Impulse</span><span class="tag">Nano 33 BLE</span><span class="tag">C++</span><a class="repo" href="https://github.com/NKASG/Gesture-Recognition" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-gun">
+          <div class="top"><span class="ref">EDGE VISION</span><span class="metric">85% train acc.</span></div>
+          <h3>Gun detection on surveillance cameras</h3>
+          <p>A YOLOv8 detector trained on a curated video dataset and deployed to a Raspberry Pi wired into a CCTV feed for real-time alerts. It grew out of a 2019 smart-CCTV build and was deployed in security work for EPAIL Nigeria.</p>
+          <div class="tags"><span class="tag">YOLOv8</span><span class="tag">Raspberry Pi</span><span class="tag">CCTV</span><a class="repo" href="https://github.com/NKASG/Gun-detection-algorithm" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-traffic">
+          <div class="top"><span class="ref">VISION · HRI</span><span class="metric">gesture</span></div>
+          <h3>Traffic-police gesture recognition</h3>
+          <p>A vision model that reads a traffic officer's hand signals. An autonomous vehicle needs exactly this kind of perception at a busy junction.</p>
+          <div class="tags"><span class="tag">Computer vision</span><span class="tag">Python</span><a class="repo" href="https://github.com/NKASG/Traffic_police_gesture" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-pcb">
+          <div class="top"><span class="ref">EDGE VISION · QA</span><span class="metric">production line</span></div>
+          <h3>PCB defect recognition</h3>
+          <p>A camera inspection system on an OpenMV board that flags defective electricity-meter PCBs during manufacturing and replaces part of the manual visual check.</p>
+          <div class="tags"><span class="tag">OpenMV</span><span class="tag">MicroPython</span><span class="tag">Inspection</span></div>
+        </article>
+        <article class="proj" id="p-sun">
+          <div class="top"><span class="ref">ACTUATION</span><span class="metric">sense → act</span></div>
+          <h3>Automatic sun-tracking solar panel</h3>
+          <p>A light-sensing tracker that turns the panel to follow the sun and raise energy yield. It runs the full sense, decide and act loop in a small machine.</p>
+          <div class="tags"><span class="tag">Sensors</span><span class="tag">Motor control</span><span class="tag">Solar</span></div>
+        </article>
+        <article class="proj" id="p-inverter">
+          <div class="top"><span class="ref">POWER · CONTROL</span><span class="metric">12/24/36 V</span></div>
+          <h3>Microcontroller-controlled push-pull inverter</h3>
+          <p>My final-year project: a multi-voltage push-pull inverter with the power stage, PCB layout and closed-loop control firmware, built alongside buck and boost designs on ferrite-core transformers.</p>
+          <div class="tags"><span class="tag">Power electronics</span><span class="tag">PCB</span><span class="tag">Control</span></div>
+        </article>
+        <article class="proj" id="p-kws">
+          <div class="top"><span class="ref">TINYML AUDIO</span><span class="metric">on-device</span></div>
+          <h3>Keyword spotting</h3>
+          <p>A wake-word model that recognises "yes" and "no" on a microcontroller. It is the base for voice commands on a small robot.</p>
+          <div class="tags"><span class="tag">TinyML</span><span class="tag">Audio</span><span class="tag">C++</span><a class="repo" href="https://github.com/NKASG/Keyword-Recognition" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-stm32">
+          <div class="top"><span class="ref">BARE METAL</span><span class="metric">STM32L152</span></div>
+          <h3>Segment-LCD driver on STM32 Discovery</h3>
+          <p>Register-level C that drives the GH08127T LCD on the STM32L152C Discovery board, with no vendor abstraction layer.</p>
+          <div class="tags"><span class="tag">STM32</span><span class="tag">C</span><span class="tag">Drivers</span><a class="repo" href="https://github.com/NKASG/Using-GH08127T_LCD" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-omni">
+          <div class="top"><span class="ref">IOT · TELEMETRY</span><span class="metric">2026</span></div>
+          <h3>OmniOne Field Monitor</h3>
+          <p>Multi-tenant field diagnostics for Emonio P3 energy loggers. A HiveMQ MQTT subscriber keys devices by immutable ID, stores telemetry and device logs, and serves a monitoring dashboard.</p>
+          <div class="tags"><span class="tag">MQTT</span><span class="tag">HiveMQ</span><span class="tag">Python</span><a class="repo" href="https://github.com/NKASG/energy-dashboard" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-pos">
+          <div class="top"><span class="ref">FIRMWARE · FLEET</span><span class="metric">in production</span></div>
+          <h3>POS terminal firmware &amp; terminal management system</h3>
+          <p>Firmware for an electronic POS machine, plus a terminal management pipeline that pushes OTA updates, monitors device behaviour and runs remote diagnostics on deployed units.</p>
+          <div class="tags"><span class="tag">C</span><span class="tag">RTOS</span><span class="tag">OTA</span></div>
+        </article>
+        <article class="proj" id="p-ami">
+          <div class="top"><span class="ref">ENERGY · AMI</span><span class="metric">research group</span></div>
+          <h3>Energy monitoring &amp; DC smart metering</h3>
+          <p>A home energy-monitoring system and a DC meter design for Advanced Metering Infrastructure, built with the OAU Power &amp; Machine Research Group and Euroshima Energy Sustainability Ltd.</p>
+          <div class="tags"><span class="tag">IoT</span><span class="tag">Metering</span><span class="tag">Data acquisition</span></div>
+        </article>
+        <article class="proj" id="p-bio">
+          <div class="top"><span class="ref">EMBEDDED</span><span class="metric">in use</span></div>
+          <h3>Biometric fingerprint attendance system</h3>
+          <p>Embedded fingerprint attendance hardware, designed and integrated for workforce management at WarpSpeed.</p>
+          <div class="tags"><span class="tag">Biometrics</span><span class="tag">Embedded</span></div>
+        </article>
+        <article class="proj" id="p-psu">
+          <div class="top"><span class="ref">POWER</span><span class="metric">MEMMCOL</span></div>
+          <h3>Digital power supply</h3>
+          <p>A microcontroller-controlled bench power supply developed during my embedded-systems internship at MEMMCOL.</p>
+          <div class="tags"><span class="tag">Power</span><span class="tag">Embedded C</span></div>
+        </article>
+        <article class="proj" id="p-am">
+          <div class="top"><span class="ref">RF · ANALOG</span><span class="metric">fabricated</span></div>
+          <h3>AM transmitter &amp; receiver</h3>
+          <p>An amplitude-modulation station designed, fabricated and tested at circuit level.</p>
+          <div class="tags"><span class="tag">Analog</span><span class="tag">RF</span></div>
+        </article>
+        <article class="proj" id="p-drug">
+          <div class="top"><span class="ref">RAG · RESEARCH</span><span class="metric">published</span></div>
+          <h3>Drug Insights</h3>
+          <p>An open-source RAG assistant that answers medication questions from Nigerian formularies for clinicians. Built with Pinecone and GPT models and evaluated with S-BERT. Published on arXiv and medRxiv.</p>
+          <div class="tags"><span class="tag">RAG</span><span class="tag">Pinecone</span><span class="tag">LLMs</span><a class="repo" href="https://github.com/OpenSourceCollective/drug_insights" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-flood">
+          <div class="top"><span class="ref">GEOSPATIAL · RESEARCH</span><span class="metric">published</span></div>
+          <h3>Flood Risk Index for African cities</h3>
+          <p>A GIS multi-criteria model that turns open hydrology, soil, land-cover and drainage data into a 0–1 flood risk score. It came out of Axum AI's residential-planning work in Lagos.</p>
+          <div class="tags"><span class="tag">GIS</span><span class="tag">Python</span><a class="repo" href="https://github.com/OpenSourceCollective/flood_risk" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-parcel">
+          <div class="top"><span class="ref">AI AGENT</span><span class="metric">2026</span></div>
+          <h3>ParcelPilot support agent</h3>
+          <p>A customer-support agent for a logistics platform. It enforces per-account data isolation on the server, flags conflicting policy sources, and asks a human to confirm before any database write.</p>
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">Agents</span><span class="tag">RAG</span><a class="repo" href="https://github.com/NKASG/Calquity" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-hr">
+          <div class="top"><span class="ref">LLM · VOICE</span><span class="metric">internal tools</span></div>
+          <h3>RAG HR assistant &amp; voice chatbot</h3>
+          <p>A company-policy and recruitment assistant on DeepLake, an ATS résumé checker, a meeting-report summariser, and a voice chatbot with Whisper input and ElevenLabs output.</p>
+          <div class="tags"><span class="tag">LangChain</span><span class="tag">DeepLake</span><span class="tag">Whisper</span></div>
+        </article>
+        <article class="proj" id="p-health">
+          <div class="top"><span class="ref">HEALTH DATA</span><span class="metric">Axum AI</span></div>
+          <h3>Health-record validation</h3>
+          <p>An expert-system approach to checking electronic health-record quality, plus a chest X-ray pneumonia classifier built in my own deep-learning work.</p>
+          <div class="tags"><span class="tag">Expert systems</span><span class="tag">CNN</span><a class="repo" href="https://github.com/NKASG/Pneumonia-detection" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-potato">
+          <div class="top"><span class="ref">AGRI VISION</span><span class="metric">93% test acc.</span></div>
+          <h3>Potato leaf disease classifier</h3>
+          <p>A CNN trained from scratch to sort leaves into early blight, late blight or healthy, served through Gradio. It is a candidate model for a crop-scouting robot or drone.</p>
+          <div class="tags"><span class="tag">CNN</span><span class="tag">TensorFlow</span><a class="repo" href="https://github.com/NKASG/Potato-Leaf-diesease-classifier" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-quant">
+          <div class="top"><span class="ref">QUANT · RISK</span><span class="metric">WarpSpeed</span></div>
+          <h3>Credit &amp; rate-risk modelling</h3>
+          <p>The Merton structural model, the CIR interest-rate model and PCA, applied to risk-analysis and financial-engineering pipelines.</p>
+          <div class="tags"><span class="tag">Merton</span><span class="tag">CIR</span><span class="tag">PCA</span></div>
+        </article>
+        <article class="proj" id="p-inventory">
+          <div class="top"><span class="ref">DATA · BACKEND</span><span class="metric">2026</span></div>
+          <h3>Inventory &amp; business management platforms</h3>
+          <p>A FastAPI and SQLAlchemy platform for two sister electronics retailers, with JWT roles, stock batches, sales targets and separate books. Also a steel-inventory system with an Excel front end and a Python back end.</p>
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span><a class="repo" href="https://github.com/NKASG/okemzhub-technext360" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+        <article class="proj" id="p-security">
+          <div class="top"><span class="ref">DATA · RISK</span><span class="metric">CLI tool</span></div>
+          <h3>Security Insight Agent (Ikeja)</h3>
+          <p>Takes in public, social and curated incident data, scores each event by severity, credibility and recency, and produces a per-location security score with a query CLI.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Scoring</span><a class="repo" href="https://github.com/NKASG/security_insight" target="_blank" rel="noopener">repo ↗</a></div>
+        </article>
+      </div>
+      <div class="more-row"><button type="button" class="btn" id="more-btn" aria-expanded="false">Show all projects</button></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Revision history</h2>
+        <p>Professional and research experience, newest first.</p>
+      </div>
+      <div class="rev-wrap">
+        <table class="rev">
+          <thead><tr><th>Rev</th><th>Date</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="r">G</td><td class="d">Nov 2023 – now</td>
+              <td>
+                <div class="role">Firmware Engineer &amp; Technical Support</div>
+                <div class="org">WarpSpeed Financials · Lagos</div>
+                <ul>
+                  <li>Lead firmware developer for the company's hardware products, including an electronic POS terminal (C, RTOS).</li>
+                  <li>Built the terminal management pipeline for OTA firmware updates, device telemetry and remote diagnostics.</li>
+                  <li>Wrote in-firmware diagnostic routines that pinpoint hardware faults in the field. Provide tier-3 support with field teams.</li>
+                  <li>Delivered the biometric attendance system, RAG assistants for HR, and risk models using Merton, CIR and PCA.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">F</td><td class="d">Jul 2023 – now</td>
+              <td>
+                <div class="role">ML Developer &amp; Research Collaborator</div>
+                <div class="org">Axum AI · Lagos (open-source research group)</div>
+                <ul>
+                  <li>Co-authored two preprints: Drug Insights (arXiv, medRxiv) and a flood-risk index model (EarthArXiv).</li>
+                  <li>Worked on the Drug Insights retrieval pipeline, including the Pinecone vector-store integration, and on health-record validation tools.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">E</td><td class="d">Nov 2022 – Oct 2023</td>
+              <td>
+                <div class="role">Hardware R&amp;D Engineer &amp; Production Supervisor</div>
+                <div class="org">Momas Electricity Meter Manufacturing Co. (MEMMCOL) · Ogun State</div>
+                <ul>
+                  <li>Led hardware and firmware programming in R&amp;D. Designed PCBs in Proteus and DipTrace and ran fabrication, including reflow ovens and CNC.</li>
+                  <li>Put a camera-based PCB defect recognition system into service on the production line.</li>
+                  <li>Debugged circuit failures with oscilloscopes, logic analyzers and meter calibration benches.</li>
+                  <li>Supervised the production team and trained technicians on calibration and safety procedures.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">D</td><td class="d">Mar 2022 – Nov 2022</td>
+              <td>
+                <div class="role">Student Intern, Machine Learning</div>
+                <div class="org">One Innovation Hub · Offa, Kwara State</div>
+                <ul><li>Python and machine-learning training and projects at a technology and entrepreneurship hub. Ran in parallel with the Global AI Hub international ML bootcamp.</li></ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">C</td><td class="d">Oct 2019 – Mar 2020</td>
+              <td>
+                <div class="role">Embedded Systems Engineering Intern</div>
+                <div class="org">MEMMCOL · Ogun State</div>
+                <ul><li>Embedded C firmware and electronics. Built a microcontroller-controlled digital power supply.</li></ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">B</td><td class="d">Jan 2019 – Sep 2022</td>
+              <td>
+                <div class="role">Hardware Developer &amp; Research Assistant</div>
+                <div class="org">Power &amp; Machine Research Group, OAU, with Euroshima Energy Sustainability Ltd · Ile-Ife</div>
+                <ul>
+                  <li>Designed buck and boost inverter systems on ferrite-core transformers and a 12/24/36 V push-pull inverter.</li>
+                  <li>Built a full energy-monitoring system using home-automation principles, and a DC meter for AMI.</li>
+                  <li>Researched and prototyped an automatic sun-tracking solar panel. Contributed to wind, solar and biogas integration work.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="r">A</td><td class="d">2015 – 2019</td>
+              <td>
+                <div class="role">Electrical installation &amp; CCTV (apprenticeship to project lead)</div>
+                <div class="org">Hasbiyallahu Electrical Installation &amp; Services, Offa · Ladorb Technology, Ilorin</div>
+                <ul><li>Electrical fault clearing and installation, solar PV, smart prepaid meters and IP CCTV. Advanced from apprentice to managing installation projects.</li></ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Pin description</h2>
+        <p>Tools and methods, grouped by function and ordered for the role you selected.</p>
+      </div>
+      <div class="pins" id="pins">
+        <div class="pingroup" id="s-embedded"><h3>Embedded &amp; firmware</h3><ul><li>C</li><li>C++</li><li>RTOS</li><li>STM32</li><li>Arduino</li><li>Raspberry Pi</li><li>SIM800 GSM</li><li>OTA updates</li><li>Device diagnostics</li></ul></div>
+        <div class="pingroup" id="s-edge"><h3>Edge AI &amp; perception</h3><ul><li>TinyML</li><li>Edge Impulse</li><li>TensorFlow</li><li>PyTorch</li><li>YOLOv8</li><li>OpenMV</li><li>Computer vision</li></ul></div>
+        <div class="pingroup" id="s-hw"><h3>Hardware &amp; power</h3><ul><li>PCB design</li><li>Proteus</li><li>DipTrace</li><li>Reflow &amp; CNC</li><li>Buck / boost</li><li>Inverters</li><li>Solar PV</li><li>Analog &amp; RF</li></ul></div>
+        <div class="pingroup" id="s-iot"><h3>IoT &amp; telemetry</h3><ul><li>MQTT</li><li>HiveMQ</li><li>ThingsBoard</li><li>WebSockets</li><li>Fleet monitoring</li><li>Smart metering</li></ul></div>
+        <div class="pingroup" id="s-test"><h3>Test &amp; measurement</h3><ul><li>Oscilloscope</li><li>Logic analyzer</li><li>Calibration benches</li><li>Automated testing</li><li>Quality control</li></ul></div>
+        <div class="pingroup" id="s-ai"><h3>Applied AI &amp; LLMs</h3><ul><li>RAG</li><li>LangChain</li><li>Pinecone</li><li>DeepLake</li><li>ChromaDB</li><li>LLM fine-tuning</li><li>Whisper</li></ul></div>
+        <div class="pingroup" id="s-sw"><h3>Software &amp; data</h3><ul><li>Python</li><li>FastAPI</li><li>Django</li><li>SQLAlchemy</li><li>pandas</li><li>Docker</li><li>React</li><li>Git</li><li>MATLAB</li></ul></div>
+        <div class="pingroup" id="s-quant"><h3>Quantitative methods</h3><ul><li>Merton model</li><li>CIR model</li><li>PCA</li><li>Risk analysis</li><li>Statistics</li></ul></div>
+        <div class="pingroup" id="s-lead"><h3>Leadership</h3><ul><li>Production supervision</li><li>Technician training</li><li>Technical documentation</li><li>Field support</li><li>English &amp; Yoruba</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Credentials</h2>
+        <p>Education and verified certifications, newest first. Titles link to the issuer's verification page where one exists.</p>
+      </div>
+      <div class="two">
+        <div class="edu">
+          <div class="item">
+            <span class="label">Graduate study</span>
+            <h3>MSc Financial Engineering</h3>
+            <div class="meta">WorldQuant University · completing December 2026</div>
+            <p>Stochastic modelling, econometrics, risk and machine learning for finance. Its Computer Vision Lab (2026) extended my deep-learning work.</p>
+          </div>
+          <div class="item">
+            <span class="label">Degree</span>
+            <h3>B.Sc. Electronic &amp; Electrical Engineering</h3>
+            <div class="meta">Obafemi Awolowo University, Ile-Ife · 2015 – 2022</div>
+            <p>Coursework: microelectronic devices, instrumentation &amp; control, digital circuit design, computational structures, engineering analysis, statistics, MATLAB and Python. Final-year project: microcontroller-controlled power inverter.</p>
+          </div>
+          <div class="item">
+            <span class="label">Leadership</span>
+            <h3>Senior Prefect &amp; JET Club project leader</h3>
+            <div class="meta">Ansar-ud-deen College, Offa · 2014 – 2015</div>
+          </div>
+        </div>
+        <ul class="certs">
+          <li><span class="t"><a href="https://www.credly.com/badges/f8c64b74-1f73-456a-93a4-967dac856b0d" target="_blank" rel="noopener">Computer Vision Lab</a><span class="new">NEW</span></span><span class="i">WorldQuant University</span><span class="when">Apr 2026</span></li>
+          <li><span class="t"><a href="https://www.credly.com/badges/8230499f-2036-4dda-9f9d-c7817823adaf" target="_blank" rel="noopener">Foundations of Financial Engineering</a></span><span class="i">WorldQuant University</span><span class="when">May 2025</span></li>
+          <li><span class="t"><a href="https://learn.activeloop.ai/certificates/u4pllgxqtd" target="_blank" rel="noopener">Train &amp; Fine-Tune LLMs for Production</a></span><span class="i">Activeloop</span><span class="when">Jul 2024</span></li>
+          <li><span class="t"><a href="https://learn.activeloop.ai/certificates/iruxju52kx" target="_blank" rel="noopener">LangChain &amp; Vector Databases in Production</a></span><span class="i">Activeloop</span><span class="when">Feb 2024</span></li>
+          <li><span class="t">Unsupervised Learning</span><span class="i">AI Planet</span><span class="when">Mar 2023</span></li>
+          <li><span class="t">Introduction to Embedded Machine Learning</span><span class="i">Edge Impulse · Coursera</span><span class="when"></span></li>
+          <li><span class="t">Computer Vision with Embedded Machine Learning</span><span class="i">Edge Impulse · Coursera</span><span class="when"></span></li>
+          <li><span class="t"><a href="https://globalaihub.com/certificate-share/eyJ1c2VyLWlkIjoxMjUxNTgsImNvdXJzZS1pZCI6MTE0NDY1LCJjZXJ0LWlkIjoiMTE0Njk3In0=" target="_blank" rel="noopener">Introduction to Machine Learning</a></span><span class="i">Global AI Hub</span><span class="when">Oct 2022</span></li>
+          <li><span class="t"><a href="https://globalaihub.com/certificate-share/eyJ1c2VyLWlkIjoxMjUxNTgsImNvdXJzZS1pZCI6MTEyODY0LCJjZXJ0LWlkIjoiMTEzMjYzIn0=" target="_blank" rel="noopener">Python for Machine Learning</a></span><span class="i">Global AI Hub</span><span class="when">Oct 2022</span></li>
+          <li><span class="t"><a href="https://globalaihub.com/certificate-share/eyJ1c2VyLWlkIjoxMjUxNTgsImNvdXJzZS1pZCI6MTEwNTQ4LCJjZXJ0LWlkIjoiMTEwODkxIn0=" target="_blank" rel="noopener">Introduction to Python</a></span><span class="i">Global AI Hub</span><span class="when">Oct 2022</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <h2 id="c-title">Hiring?</h2>
+        <div class="prose">
+          <p id="c-text">I'm open to embedded, fintech-hardware, quant, ML and energy-analytics roles, on-site in Nigeria or hybrid and remote anywhere. Send me the role and I'll tell you how I'd approach it.</p>
+        </div>
+      </div>
+      <aside class="spec" aria-label="Contact details">
+        <div class="spec-h"><span>Contact</span></div>
+        <dl>
+          <dt>Email</dt>
+          <dd><div class="copyrow"><code id="email">mohafeezola@gmail.com</code><button class="btn" type="button" id="copy-email" style="padding:.3rem .6rem;font-size:.75rem">Copy</button><span class="copied" id="copied" hidden>Copied</span></div></dd>
+          <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/mohammed-afeez-90166b145/" target="_blank" rel="noopener">mohammed-afeez ↗</a></dd>
+          <dt>GitHub</dt><dd><a href="https://github.com/NKASG" target="_blank" rel="noopener">github.com/NKASG ↗</a></dd>
+          <dt>Scholar</dt><dd><a href="https://scholar.google.com/citations?user=MxNlKXEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a></dd>
+          <dt>Based in</dt><dd>Lagos, Nigeria · open to relocating</dd>
+          <dt>References</dt><dd>Available on request</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Mohammed Afeez Olamilekan</span>
+    <span>Rev. 2026 · Lagos, NG</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ROLES={
+    "career":{
+      sub:"Embedded systems & AI engineer with a Financial Engineering MSc",
+      lede:"I build hardware, firmware and AI systems, and I understand the money they move. I have 4+ years in firmware and hardware R&D, including payment terminals at a fintech, and an MSc in Financial Engineering from WorldQuant University (December 2026). I can work on the device, the data and the risk model.",
+      fit:["Lead firmware developer for POS payment terminals at WarpSpeed Financials, covering OTA updates, telemetry and diagnostics.","Financial engineering in practice: I have applied Merton, CIR and PCA models to risk analysis at work.","Production AI: edge vision on a factory line, RAG assistants, and two co-authored research preprints."],
+      cta:["Roles I fit","#roles"],
+      spec:[["Current","Firmware Engineer, WarpSpeed Financials (fintech)"],["Degrees","B.Sc. Electronic & Electrical Eng. (OAU) · MSc Financial Eng. (WQU, Dec 2026)"],["Engineering","C/C++, RTOS, STM32, PCB design, IoT / MQTT"],["Finance","Merton, CIR, PCA, risk modelling, Python"],["AI","YOLOv8, TinyML, RAG & LLMs"],["Status","!Open to roles · on-site, hybrid or remote"]],
+      projects:["p-pos","p-quant","p-omni","p-pcb","p-drug","p-gun","p-parcel","p-inventory","p-bio"],
+      skills:["s-embedded","s-quant","s-edge","s-ai","s-iot","s-hw","s-sw","s-test","s-lead"],
+      note:"Ordered for job applications. Fintech and finance-related work comes first.",
+      cTitle:"Hiring?",
+      cText:"I'm open to embedded, fintech-hardware, quant, ML and energy-analytics roles, on-site in Nigeria or hybrid and remote anywhere. Send me the role and I'll tell you how I'd approach it."
+    },
+    "scholarship":{
+      sub:"Researcher in embedded intelligence, robotics & AI for low-resource settings",
+      lede:"I research and build intelligent systems that work where infrastructure is thin: AI models that run on microcontrollers, power and energy hardware, and open-source AI tools for healthcare and climate risk in Africa. With an engineering degree, a financial-engineering MSc finishing in December 2026 and two co-authored preprints, I am seeking a fully funded PhD.",
+      fit:["Published: co-author of two open-source preprints on arXiv, medRxiv and EarthArXiv (6 citations).","4+ years of applied engineering: firmware, PCBs, power electronics and edge-AI systems in production.","Breadth across disciplines: electrical engineering, machine learning and quantitative finance."],
+      cta:["Research profile","#research"],
+      spec:[["Degrees","B.Sc. Electronic & Electrical Eng. (OAU) · MSc Financial Eng. (WQU, Dec 2026)"],["Research","2 co-authored preprints · 6 citations · h-index 2"],["Experience","4+ years in hardware, firmware & applied AI"],["Fields","Embedded AI, robotics, energy systems, AI for social good"],["Status","!Seeking a fully funded PhD from 2027"]],
+      projects:["p-gesture","p-pcb","p-drug","p-flood","p-gun","p-omni","p-inverter","p-traffic","p-sun"],
+      skills:["s-edge","s-embedded","s-ai","s-hw","s-iot","s-sw","s-quant","s-test","s-lead"],
+      note:"Selected to show research range.",
+      cTitle:"Open to supervisors & programmes",
+      cText:"I'm looking for a fully funded PhD starting in 2027. If your group works on embedded or edge AI, robotics, smart energy systems or AI for low-resource settings, I'd like to talk about how I can contribute."
+    }
+  };
+  var SHOW=6, showAll=false, current="career";
+  var $=function(id){return document.getElementById(id)};
+  var tabs=document.querySelectorAll('.role-tabs button');
+  var grid=$('projects-grid'), cards=[].slice.call(grid.children), pins=$('pins');
+  var moreBtn=$('more-btn');
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function renderProjects(){
+    var order=ROLES[current].projects;
+    cards.sort(function(a,b){
+      var ia=order.indexOf(a.id), ib=order.indexOf(b.id);
+      return (ia<0?99:ia)-(ib<0?99:ib);
+    }).forEach(function(c,i){
+      grid.appendChild(c);
+      c.classList.toggle('feat',order.indexOf(c.id)>-1 && order.indexOf(c.id)<SHOW);
+      c.hidden=!showAll && i>=SHOW;
+    });
+    moreBtn.textContent=showAll?'Show fewer':'Show all '+cards.length+' projects';
+    moreBtn.setAttribute('aria-expanded',String(showAll));
+  }
+  function apply(role,fromHash){
+    if(!ROLES[role]) role="career";
+    current=role; var R=ROLES[role];
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.getAttribute('data-role')===role))});
+    $('h-sub').textContent=R.sub;
+    $('h-lede').textContent=R.lede;
+    $('h-fit').innerHTML=R.fit.map(function(f){return '<li>'+esc(f)+'</li>'}).join('');
+    $('h-cta').textContent=R.cta[0]; $('h-cta').setAttribute('href',R.cta[1]);
+    $('spec').innerHTML=R.spec.map(function(r){
+      var v=r[1].charAt(0)==='!'?'<span class="status">'+esc(r[1].slice(1))+'</span>':esc(r[1]);
+      return '<dt>'+esc(r[0])+'</dt><dd>'+v+'</dd>';
+    }).join('');
+    $('proj-note').textContent=R.note;
+    $('c-title').textContent=R.cTitle; $('c-text').textContent=R.cText;
+    R.skills.forEach(function(id){pins.appendChild($(id))});
+    document.querySelectorAll('[data-for]').forEach(function(s){
+      s.hidden=s.getAttribute('data-for').split(' ').indexOf(role)<0;
+    });
+    renderProjects();
+    if(!fromHash){try{history.replaceState(null,'','#'+role)}catch(e){}}
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){apply(t.getAttribute('data-role'))})});
+  moreBtn.addEventListener('click',function(){showAll=!showAll;renderProjects()});
+  function fromHash(){var h=(location.hash||'').slice(1); if(ROLES[h]) apply(h,true);}
+  window.addEventListener('hashchange',fromHash);
+  apply(ROLES[(location.hash||"").slice(1)]?(location.hash||"").slice(1):"career",true);
+
+  var copyBtn=$('copy-email'),note=$('copied'),email=$('email');
+  copyBtn.addEventListener('click',function(){
+    function done(){note.hidden=false;setTimeout(function(){note.hidden=true},1800)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(email);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(email.textContent).then(done,fallback)}catch(e){fallback()}
+  });
+})();
+</script>
+</body>
+</html>
